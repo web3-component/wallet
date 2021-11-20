@@ -1,0 +1,10 @@
+node_modules
+dist
+.nyc_output
+.idea
+.storybook
+.DS_Store
+
+*.tsbuildinfo
+*.local
+*.log
