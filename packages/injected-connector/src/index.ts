@@ -1,22 +1,7 @@
 import { AbstractConnectorArguments, ConnectorUpdate } from '@web3-component/types'
-import { AbstractConnector } from '@web3-component/abstract-connector'
+import { AbstractConnector, NoProviderError, UserRejectedRequestError } from '@web3-component/abstract-connector'
+
 // https://github.com/NoahZinsmeister/web3-react/blob/v6/packages/injected-connector/src/index.ts
-export class NoEthereumProviderError extends Error {
-  public constructor() {
-    super()
-    this.name = this.constructor.name
-    this.message = 'No Ethereum provider was found on window.ethereum.'
-  }
-}
-
-export class UserRejectedRequestError extends Error {
-  public constructor() {
-    super()
-    this.name = this.constructor.name
-    this.message = 'The user rejected the request.'
-  }
-}
-
 export class InjectedConnector extends AbstractConnector {
   constructor(kwargs: AbstractConnectorArguments) {
     super(kwargs)
@@ -47,7 +32,7 @@ export class InjectedConnector extends AbstractConnector {
 
   public async activate(): Promise<ConnectorUpdate> {
     if (!window.ethereum) {
-      throw new NoEthereumProviderError()
+      throw new NoProviderError()
     }
 
     if (window.ethereum.on) {
@@ -81,7 +66,7 @@ export class InjectedConnector extends AbstractConnector {
 
   public async getChainId(): Promise<number | string> {
     if (!window.ethereum) {
-      throw new NoEthereumProviderError()
+      throw new NoProviderError()
     }
 
     let chainId
@@ -93,12 +78,22 @@ export class InjectedConnector extends AbstractConnector {
       console.warn('eth_chainId was unsuccessful', error)
     }
 
+    if (!chainId) {
+      chainId =
+        (window.ethereum as any).chainId ||
+        (window.ethereum as any).networkVersion
+    }
+
+    if (/^0x/.test(chainId)) {
+      chainId = parseInt(chainId, 16)
+    }
+
     return chainId
   }
 
   public async getAccount(): Promise<null | string> {
     if (!window.ethereum) {
-      throw new NoEthereumProviderError()
+      throw new NoProviderError()
     }
 
     let account

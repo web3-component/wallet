@@ -1,6 +1,22 @@
 import { EventEmitter } from 'events'
 import { AbstractConnectorArguments, ConnectorUpdate, ConnectorEvent } from '@web3-component/types'
 
+export class UserRejectedRequestError extends Error {
+  public constructor() {
+    super()
+    this.name = this.constructor.name
+    this.message = 'The user rejected the request.'
+  }
+}
+
+export class NoProviderError extends Error {
+  public constructor() {
+    super()
+    this.name = this.constructor.name
+    this.message = 'No provider was found.'
+  }
+}
+
 export abstract class AbstractConnector extends EventEmitter {
   public readonly supportedChainIds?: number[]
 

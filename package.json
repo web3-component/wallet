@@ -10,10 +10,10 @@
     "lint": "eslint --ext js,jsx,ts,tsx,vue . --fix"
   },
   "devDependencies": {
-    "@types/node": "16.11.9",
+    "@types/node": "16.11.10",
     "@typescript-eslint/eslint-plugin": "5.4.0",
     "@typescript-eslint/parser": "5.4.0",
-    "eslint": "8.2.0",
+    "eslint": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
     "lerna": "4.0.0",
     "prettier": "2.4.1",
