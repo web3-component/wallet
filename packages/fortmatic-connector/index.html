@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fortmatic Connector</title>
+  </head>
+  <body>
+    <script type="module">
+      import { FortmaticConnector } from './src/index.ts'
+      const connector = new FortmaticConnector({
+        apiKey: 'pk_test_FB5E5C15F2EC5AE6',
+        chainId: 1
+      })
+      const resp = await connector.activate()
+      console.log(resp)
+    </script>
+  </body>
+</html>

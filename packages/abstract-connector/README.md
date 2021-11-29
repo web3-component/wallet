@@ -1,1 +1,1 @@
-# Typescript Component
+# Abstract Connector

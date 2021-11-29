@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Injected Connector</title>
   </head>
   <body>
     <script type="module">
       import { InjectedConnector } from './src/index.ts'
+      const CHAIN_ID = 1
       const injected = new InjectedConnector({
-        supportedChainIds: [4],
+        supportedChainIds: [CHAIN_ID],
       });
       const data = await injected.activate()
       console.log(data)

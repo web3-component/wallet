@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Walletconnect Connector</title>
+  </head>
+  <body>
+    <script type="module">
+      import { WalletConnectConnector } from './src/index'
+      const CHAIN_ID = 1
+      const walletlink = new WalletConnectConnector({
+        supportedChainIds: [CHAIN_ID],
+        chainId: CHAIN_ID,
+        rpc: {
+          [CHAIN_ID]: 'https://mainnet.infura.io/v3/84842078b09946638c03157f83405213',
+        },
+      });
+      console.log(walletlink);
+      walletlink.activate()
+    </script>
+  </body>
+</html>
